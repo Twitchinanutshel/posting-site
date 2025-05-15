@@ -1,5 +1,5 @@
 import {ApolloServer} from '@apollo/server';
-import {ApolloStandaloneServer, startStandaloneServer} from '@apollo/server/standalone';
+import {startStandaloneServer} from '@apollo/server/standalone';
 
 const typeDefs = `
   type Query {
