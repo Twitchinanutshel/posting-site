@@ -20,7 +20,8 @@ const PasswordPage = ({ onLoginSuccess }) => {
       console.log('Login response:', response);
       if (response.data.login) {
         console.log('✅ Authenticated');
-        await onLoginSuccess();
+        const refetchResult = await onLoginSuccess();
+        console.log('Refetched auth status:', refetchResult.data.isAuthenticated);
         navigate('/gallery');
       } else {
         console.log('❌ Incorrect password');
