@@ -13,8 +13,14 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(cookieParser())
+
+const allowedOrigin = 'https://mariandnoahmemories.netlify.app';
+app.options('/graphql', cors({
+  origin: allowedOrigin,
+  credentials: true,
+}));
 app.use(cors({
-  origin: 'https://mariandnoahmemories.netlify.app',
+  origin: allowedOrigin,
   credentials: true
 }))
 

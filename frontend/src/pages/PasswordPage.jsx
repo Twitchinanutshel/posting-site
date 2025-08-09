@@ -17,6 +17,7 @@ const PasswordPage = () => {
     e.preventDefault();
     try {
       const response = await submitLogin({ variables: { password } });
+      console.log('Login response:', response);
       if (response.data.login) {
         console.log('✅ Authenticated');
         navigate('/gallery');
@@ -27,6 +28,7 @@ const PasswordPage = () => {
       console.error('Login error:', err.message);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-pink-50 flex items-center justify-center p-6">
@@ -54,7 +56,7 @@ const PasswordPage = () => {
             {loading ? 'Checking...' : 'Log In 💞'}
           </button>
         </form>
-                
+
         {error && (
           <p className="mt-4 text-red-500 text-center">Incorrect password 😢</p>
         )}
