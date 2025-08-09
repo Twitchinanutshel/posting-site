@@ -1,6 +1,7 @@
 const accessTypeDefs = `
   type Query {
-    _: Boolean
+    _: Boolean,
+    isAuthenticated: Boolean!
   }
 
   type Mutation {

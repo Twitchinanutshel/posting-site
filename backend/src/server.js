@@ -1,8 +1,9 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import path from 'path';
-import { fileURLToPath } from 'url'; 
+import { fileURLToPath } from 'url';
 import { graphqlUploadExpress } from 'graphql-upload';
 import { typeDefs, resolvers } from './graphql/index.js';
 
@@ -11,10 +12,11 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-const corsOptions = {
-  origin: "http://localhost:5173",
+app.use(cookieParser())
+app.use(cors({
+  origin: 'http://localhost:5173',
   credentials: true
-};
+}))
 
 app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 1 }));
 
@@ -25,14 +27,18 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req }),
-  cors: corsOptions
+  context: ({ req, res }) => ({ req, res }),
 });
 
 await server.start();
 
-server.applyMiddleware({ app, path: '/graphql' });
+server.applyMiddleware({
+  app,
+  path: '/graphql',
+  cors: false
+});
 
-app.listen(4000, () => {
-  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

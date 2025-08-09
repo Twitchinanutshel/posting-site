@@ -15,38 +15,18 @@ const PasswordPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await submitLogin({ variables: { password } });
-
-      const token = response.data.login;
-      if (token) {
-        sessionStorage.setItem('token', token); // ✅ just store token now
+      if (response.data.login) {
         console.log('✅ Authenticated');
-
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
         navigate('/gallery');
       } else {
-        console.log('❌ Incorrect password.');
+        console.log('❌ Incorrect password');
       }
     } catch (err) {
       console.error('Login error:', err.message);
     }
   };
-
-
-  let value = null;
-
-  try {
-    const access = sessionStorage.getItem('access');
-    if (access) {
-      const parsed = JSON.parse(access);
-      value = parsed?.value ?? null;
-    }
-  } catch (e) {
-    console.error('Error parsing access:', e);
-  }
 
   return (
     <div className="min-h-screen bg-pink-50 flex items-center justify-center p-6">
@@ -74,10 +54,7 @@ const PasswordPage = () => {
             {loading ? 'Checking...' : 'Log In 💞'}
           </button>
         </form>
-
-        {value === 'true' && (
-          <p className="mt-4 text-green-600 text-center">Correct password! 💖</p>
-        )}
+                
         {error && (
           <p className="mt-4 text-red-500 text-center">Incorrect password 😢</p>
         )}
