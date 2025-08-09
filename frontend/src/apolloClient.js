@@ -1,15 +1,10 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
-console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
-
-
 
 const client = new ApolloClient({
   link: createUploadLink({
-    uri: `${backendUrl}/graphql`,
+    uri: 'https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com/graphql',
     credentials: 'include' // send cookies automatically
   }),
   cache: new InMemoryCache(),
