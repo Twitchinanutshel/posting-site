@@ -8,7 +8,7 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-const PasswordPage = () => {
+const PasswordPage = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState("");
   const [submitLogin, { data, loading, error }] = useMutation(LOGIN_MUTATION);
   const navigate = useNavigate();
