@@ -1,9 +1,10 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
 const client = new ApolloClient({
