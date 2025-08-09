@@ -20,6 +20,7 @@ const PasswordPage = () => {
       console.log('Login response:', response);
       if (response.data.login) {
         console.log('✅ Authenticated');
+        await onLoginSuccess();
         navigate('/gallery');
       } else {
         console.log('❌ Incorrect password');

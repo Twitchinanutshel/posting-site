@@ -16,7 +16,7 @@ const IS_AUTHENTICATED = gql`
 `;
 
 function App() {
-  const { data, loading, error } = useQuery(IS_AUTHENTICATED);
+  const { data, loading, error, refetch } = useQuery(IS_AUTHENTICATED);
   
 
   if (loading) return <p>Loading...</p>;
@@ -31,7 +31,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route index path='/' element={<PasswordPage />} />
+          <Route index path='/' element={<PasswordPage onLoginSuccess={refetch}/>} />
           <Route path='/gallery' element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <GalleryPage />
