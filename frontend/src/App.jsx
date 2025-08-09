@@ -17,6 +17,7 @@ const IS_AUTHENTICATED = gql`
 
 function App() {
   const { data, loading, error } = useQuery(IS_AUTHENTICATED);
+  
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error checking auth status</p>;
