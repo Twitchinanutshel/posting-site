@@ -24,6 +24,9 @@ function App() {
 
   const isAuthenticated = data?.isAuthenticated;
 
+  console.log('Auth status:', isAuthenticated);
+
+
   return (
     <>
       <Router>

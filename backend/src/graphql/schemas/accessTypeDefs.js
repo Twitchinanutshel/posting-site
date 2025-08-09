@@ -5,7 +5,7 @@ const accessTypeDefs = `
   }
 
   type Mutation {
-    login(password: String!): String  # Return JWT token
+    login(password: String!): Boolean  # Return JWT token
   }
 `;
 
