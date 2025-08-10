@@ -65,7 +65,7 @@ const MemoryDetailPage = () => {
     variables: { id },
   });
 
-  if (loading) return <p className="text-pink-500">Loading memory...</p>;
+  if (loading) return <Loader />;
   if (error) return <p className="text-red-500">Memory not found.</p>;
 
   const memory = data.getMemoryById;
@@ -94,8 +94,8 @@ const MemoryDetailPage = () => {
           <button
             onClick={handleDeleteClick}
             className={`px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105 ${confirmingDelete
-                ? 'bg-gradient-to-r from-red-500 to-red-600'
-                : 'bg-gradient-to-r from-red-400 to-red-500'
+              ? 'bg-gradient-to-r from-red-500 to-red-600'
+              : 'bg-gradient-to-r from-red-400 to-red-500'
               } text-white`}
           >
             {confirmingDelete ? 'Are you sure? 💔' : 'Remove Memory 🗑'}

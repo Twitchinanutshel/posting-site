@@ -35,7 +35,7 @@ const PasswordPage = ({ onLoginSuccess }) => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-pink-100 to-pink-50 flex items-center justify-center p-6">
       <div className="w-full max-w-sm bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-200">
-        <h2 className="text-3xl font-extrabold text-pink-700 mb-6 text-center">
+        <h2 className="text-2xl font-extrabold text-pink-700 mb-6 text-center">
           💕 Anniversary Gift 💕
         </h2>
 

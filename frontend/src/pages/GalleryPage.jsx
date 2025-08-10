@@ -26,7 +26,7 @@ const GalleryPage = () => {
     refetch();
   }, []);
 
-  if (loading) return <p className="text-pink-500 text-xl text-center">Loading sweet memories...</p>;
+  if (loading) return <Loader />;
   if (error) return <p className="text-red-500 text-center">Oops! Couldn't load your memories: {error.message}</p>;
 
   return (
