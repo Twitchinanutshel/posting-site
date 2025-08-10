@@ -14,11 +14,6 @@ const BackgroundParticles = () => {
         pointerEvents: "none",
       }}
       options={{
-        background: {
-          color: {
-            value: "rgb(255, 137, 235)", // pinkish background
-          },
-        },
         fpsLimit: 60,
         interactivity: {
           detectsOn: "canvas",
