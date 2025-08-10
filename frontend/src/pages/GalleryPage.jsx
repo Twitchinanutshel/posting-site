@@ -68,10 +68,8 @@ const GalleryPage = () => {
                 />
                 <h3 className="text-lg font-bold text-pink-600">{memory.title}</h3>
                 <p className="text-sm text-gray-600 mb-1">{memory.description}</p>
-                <p className="text-xs text-gray-500">📅 Date: {memory.date}</p>
-                <p className="text-xs text-gray-500">
-                  ⏱ Uploaded: {new Date(Number(memory.uploaded_at)).toLocaleDateString('en-GB')}
-                </p>
+                <p className="text-xs text-gray-500">📅 Date: {new Date(Number(memory.date)).toLocaleDateString('en-GB')}</p>
+                <p className="text-xs text-gray-500"> ⏱ Uploaded: {new Date(Number(memory.uploaded_at)).toLocaleDateString('en-GB')}</p>
               </div>
             </Link>
           );

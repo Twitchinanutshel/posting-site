@@ -28,7 +28,7 @@ function App() {
 
 
   return (
-    <>
+    <div className='bg-pink-50'> 
       <Router>
         <Routes>
           <Route index path='/' element={<PasswordPage onLoginSuccess={refetch}/>} />
@@ -49,7 +49,7 @@ function App() {
           } />
         </Routes>
       </Router>
-    </>
+    </div>
   )
 }
 
