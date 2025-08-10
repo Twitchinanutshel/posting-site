@@ -27,7 +27,7 @@ const GalleryPage = () => {
   }, []);
 
   if (loading) return <p className="text-pink-500 text-xl text-center">Loading sweet memories...</p>;
-  if (error) return <p className="text-red-500 text-center">Oops! Couldn't load your memories.</p>;
+  if (error) return <p className="text-red-500 text-center">Oops! Couldn't load your memories: {error.message}</p>;
 
   return (
     <div className="min-h-screen bg-pink-50 p-6 font-sans text-gray-800">
