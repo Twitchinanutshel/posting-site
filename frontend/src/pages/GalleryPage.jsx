@@ -19,6 +19,8 @@ const GET_MEMORIES = gql`
 
 const GalleryPage = () => {
   const { data, loading, error, refetch } = useQuery(GET_MEMORIES);
+  console.log('Query data:', data);
+
 
   useEffect(() => {
     refetch();
