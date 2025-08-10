@@ -19,7 +19,6 @@ const GET_MEMORIES = gql`
 
 const GalleryPage = () => {
   const { data, loading, error, refetch } = useQuery(GET_MEMORIES);
-  console.log('Image URL:', `https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com${memory.image_path}`);
 
   useEffect(() => {
     refetch();
@@ -55,29 +54,27 @@ const GalleryPage = () => {
       </div>
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {data.getMemories.map(memory => (
-          <Link to={`/memory/${memory.id}`}>
-            <div
-              key={memory.id}
-              className="bg-white p-4 rounded-2xl shadow-lg hover:shadow-xl transition border border-pink-100"
-            >
-              <img
-                src={`https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com${memory.image_path}`}
-                alt={memory.title}
-                className="w-full h-48 object-cover rounded-xl mb-3"
-              />
-              <h3 className="text-lg font-bold text-pink-600">{memory.title}</h3>
-              <p className="text-sm text-gray-600 mb-1">{memory.description}</p>
-              <p className="text-xs text-gray-500">
-                📅 Date: {memory.date}
-              </p>
-              <p className="text-xs text-gray-500">
-                ⏱ Uploaded: {new Date(Number(memory.uploaded_at)).toLocaleDateString('en-GB')}
-              </p>
-            </div>
-          </Link>
+        {data.getMemories.map(memory => {
+          console.log('Image URL:', `https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com${memory.image_path}`);
+          return (
+            <Link key={memory.id} to={`/memory/${memory.id}`}>
+              <div className="bg-white p-4 rounded-2xl shadow-lg hover:shadow-xl transition border border-pink-100">
+                <img
+                  src={`https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com${memory.image_path}`}
+                  alt={memory.title}
+                  className="w-full h-48 object-cover rounded-xl mb-3"
+                />
+                <h3 className="text-lg font-bold text-pink-600">{memory.title}</h3>
+                <p className="text-sm text-gray-600 mb-1">{memory.description}</p>
+                <p className="text-xs text-gray-500">📅 Date: {memory.date}</p>
+                <p className="text-xs text-gray-500">
+                  ⏱ Uploaded: {new Date(Number(memory.uploaded_at)).toLocaleDateString('en-GB')}
+                </p>
+              </div>
+            </Link>
+          );
+        })}
 
-        ))}
       </div>
 
       <footer className="mt-10 text-center text-pink-500">
