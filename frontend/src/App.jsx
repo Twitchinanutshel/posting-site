@@ -7,6 +7,7 @@ import AddPage from './pages/AddPage';
 import MemoryDetailPage from './pages/MemoryDetailPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import TimerPage from './pages/TimerPage'
+import Loader from '../components/Loader';
 
 import { gql, useQuery } from '@apollo/client';
 
@@ -20,7 +21,7 @@ function App() {
   const { data, loading, error, refetch } = useQuery(IS_AUTHENTICATED);
 
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>Error checking auth status</p>;
 
   const isAuthenticated = data?.isAuthenticated;

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { gql, useQuery, useMutation } from '@apollo/client';
+import Loader from '../components/Loader';
+
 
 const GET_MEMORY_BY_ID = gql`
   query GetMemoryById($id: ID!) {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
+import Loader from '../components/Loader';
 
 
 const GET_MEMORIES = gql`
