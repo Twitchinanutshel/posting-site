@@ -61,7 +61,7 @@ const GalleryPage = () => {
               className="bg-white p-4 rounded-2xl shadow-lg hover:shadow-xl transition border border-pink-100"
             >
               <img
-                src={`http://localhost:4000${memory.image_path}`}
+                src={`https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com${memory.image_path}`}
                 alt={memory.title}
                 className="w-full h-48 object-cover rounded-xl mb-3"
               />
