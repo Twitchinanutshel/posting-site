@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const heartPulse = {
-  animate: {
-    scale: [1, 1.15, 1],
-    transition: {
-      duration: 1.5,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  },
-};
-
 const TimerPage = () => {
   const startDate = new Date("2023-08-11T00:00:00");
   const targetDate = new Date("2025-10-22T00:00:00");
 
+  // Calculate elapsed time since startDate
   const calculateTimeElapsed = () => {
     const now = new Date();
 
@@ -51,6 +41,7 @@ const TimerPage = () => {
     return { years, months, days, hours, minutes, seconds };
   };
 
+  // Calculate remaining time until targetDate
   const calculateTimeRemaining = () => {
     const now = new Date();
     let diff = targetDate - now;
@@ -100,26 +91,12 @@ const TimerPage = () => {
   };
 
   return (
-    <motion.div
-      className="min-h-screen bg-pink-50 flex flex-col items-center justify-center text-pink-600 font-bold px-4 mb-10"
-      animate={{ scale: [1, 1.03, 1], transition: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
-    >
-      <h2 className="mb-6 text-3xl text-center flex items-center justify-center gap-2">
-        <motion.span
-          role="img"
-          aria-label="heart"
-          variants={heartPulse}
-          animate="animate"
-          className="text-4xl"
-        >
-          💕
-        </motion.span>
-        Time Since 11th August 2023
-      </h2>
+    <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center text-pink-600 font-bold px-4">
+      <h2 className="mb-6 text-3xl text-center">💕 Time Since 11th August 2023 💕</h2>
       <div className="flex flex-wrap gap-6 text-center mb-16 text-2xl">
         {renderTimeUnits(elapsed).map((unit) => (
           <div key={"elapsed-" + unit.label}>
-            <AnimatePresence mode="popLayout">
+            <AnimatePresence mode="popLayout" >
               <motion.div
                 key={unit.value}
                 initial={{ opacity: 0, y: -10 }}
@@ -135,22 +112,11 @@ const TimerPage = () => {
         ))}
       </div>
 
-      <h2 className="mb-6 text-3xl text-center flex items-center justify-center gap-2">
-        <motion.span
-          role="img"
-          aria-label="heart"
-          variants={heartPulse}
-          animate="animate"
-          className="text-4xl"
-        >
-          💖
-        </motion.span>
-        Countdown to 22nd October 2025
-      </h2>
+      <h2 className="mb-6 text-3xl text-center">💖 Countdown to 22nd October 2025 💖</h2>
       <div className="flex flex-wrap gap-6 text-center text-2xl">
         {renderTimeUnits(remaining).map((unit) => (
           <div key={"remaining-" + unit.label}>
-            <AnimatePresence mode="popLayout">
+            <AnimatePresence mode="popLayout" >
               <motion.div
                 key={unit.value}
                 initial={{ opacity: 0, y: -10 }}
@@ -165,7 +131,7 @@ const TimerPage = () => {
           </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
