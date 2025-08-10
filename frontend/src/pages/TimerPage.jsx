@@ -101,7 +101,7 @@ const TimerPage = () => {
 
   return (
     <motion.div
-      className="min-h-screen bg-pink-50 flex flex-col items-center justify-center text-pink-600 font-bold px-4"
+      className="min-h-screen bg-pink-50 flex flex-col items-center justify-center text-pink-600 font-bold px-4 mb-10"
       animate={{ scale: [1, 1.03, 1], transition: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
     >
       <h2 className="mb-6 text-3xl text-center flex items-center justify-center gap-2">
