@@ -69,9 +69,9 @@ const AddPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-pink-50 flex items-center justify-center p-6">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border border-pink-100">
-        <h2 className="text-2xl font-bold text-pink-600 mb-6 text-center">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-pink-100 to-pink-50 flex items-center justify-center p-6">
+      <div className="w-full max-w-md bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-200">
+        <h2 className="text-3xl font-extrabold text-pink-700 mb-6 text-center">
           Add a New Memory 💌
         </h2>
 
@@ -82,7 +82,7 @@ const AddPage = () => {
             value={formData.title}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 outline-none text-pink-400"
+            className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:ring-2 focus:ring-pink-500 outline-none text-pink-500 bg-white/70"
           />
 
           <textarea
@@ -90,7 +90,7 @@ const AddPage = () => {
             placeholder="Description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-pink-200 rounded-lg resize-none focus:ring-2 focus:ring-pink-400 outline-none text-pink-400"
+            className="w-full px-4 py-2 border border-pink-300 rounded-lg resize-none focus:ring-2 focus:ring-pink-500 outline-none text-pink-500 bg-white/70"
             rows={3}
           />
 
@@ -100,33 +100,32 @@ const AddPage = () => {
             accept="image/*"
             onChange={handleFileChange}
             required
-            className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:border file:border-pink-300 file:rounded-full file:bg-pink-100 file:text-pink-700 hover:file:bg-pink-200 "
+            className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-full file:bg-gradient-to-r from-pink-300 to-pink-400 file:text-white hover:file:from-pink-400 hover:file:to-pink-500 cursor-pointer"
           />
 
           {previewUrl && (
             <div className="mt-2 text-center">
-              <p className="text-sm text-pink-400 mb-1">You have the most beautiful hair</p>
+              <p className="text-sm text-pink-500 mb-1 italic">You have the most beautiful hair</p>
               <img
                 src={previewUrl}
                 alt="Preview"
-                className="rounded-xl border border-pink-100 shadow-md w-full h-auto max-h-64 object-contain"
+                className="rounded-xl border border-pink-200 shadow-md w-full h-auto max-h-64 object-contain transition-transform duration-300 hover:scale-[1.02]"
               />
             </div>
           )}
-
 
           <input
             type="date"
             name="date"
             value={formData.date}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 outline-none text-pink-400"
+            className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:ring-2 focus:ring-pink-500 outline-none text-pink-500 bg-white/70"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-lg font-semibold transition"
+            className="w-full py-2 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-lg font-semibold shadow-md transition-transform transform hover:scale-105"
           >
             {loading ? 'Uploading...' : 'Add Memory 💖'}
           </button>
@@ -136,11 +135,12 @@ const AddPage = () => {
           )}
         </form>
 
-        <p className="text-center mt-6 text-pink-400 text-sm">
+        <p className="text-center mt-6 text-pink-600 text-sm italic">
           Every moment with you is a blessing
         </p>
       </div>
     </div>
+
   );
 };
 

@@ -33,9 +33,9 @@ const PasswordPage = ({ onLoginSuccess }) => {
 
 
   return (
-    <div className="min-h-screen bg-pink-50 flex items-center justify-center p-6">
-      <div className="w-full max-w-sm bg-white p-8 rounded-2xl shadow-lg border border-pink-100">
-        <h2 className="text-2xl font-bold text-pink-600 mb-6 text-center">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-pink-100 to-pink-50 flex items-center justify-center p-6">
+      <div className="w-full max-w-sm bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-pink-200">
+        <h2 className="text-3xl font-extrabold text-pink-700 mb-6 text-center">
           💕 Anniversary Gift 💕
         </h2>
 
@@ -47,27 +47,28 @@ const PasswordPage = ({ onLoginSuccess }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-4 py-2 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 outline-none text-pink-400"
+            className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:ring-2 focus:ring-pink-500 outline-none text-pink-500 bg-white/70"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-lg font-semibold transition"
+            className="w-full py-2 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-lg font-semibold shadow-md transition-transform transform hover:scale-105"
           >
             {loading ? 'Checking...' : 'Log In 💞'}
           </button>
         </form>
 
         {error && (
-          <p className="mt-4 text-red-500 text-center">Incorrect password 😢</p>
+          <p className="mt-4 text-red-500 text-center animate-pulse">Incorrect password 😢</p>
         )}
 
-        <p className="text-center mt-6 text-pink-400 text-sm">
+        <p className="text-center mt-6 text-pink-600 text-sm italic">
           I love you dearly 💝
         </p>
       </div>
     </div>
+
   );
 };
 

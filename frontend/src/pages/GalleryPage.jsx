@@ -36,18 +36,20 @@ const GalleryPage = () => {
           placeholder="Search for a memory!"
           className="px-4 py-2 rounded-lg border border-pink-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 w-1/2 text-pink-500 bg-white/70 backdrop-blur-sm"
         />
-        <Link
-          to="/add"
-          className="ml-4 px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
-        >
-          Add a Memory 💖
-        </Link>
-        <Link
-          to="/timer"
-          className="ml-4 px-4 py-2 bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
-        >
-          Extra Cute Things 💞
-        </Link>
+        <div>
+          <Link
+            to="/add"
+            className="ml-4 px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+          >
+            Add a Memory 💖
+          </Link>
+          <Link
+            to="/timer"
+            className="ml-4 px-4 py-2 bg-gradient-to-r from-pink-300 to-pink-400 hover:from-pink-400 hover:to-pink-500 text-white rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+          >
+            Extra Cute Things 💞
+          </Link>
+        </div>
       </div>
 
       <div className="flex justify-center space-x-4 mb-8">

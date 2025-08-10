@@ -73,35 +73,39 @@ const MemoryDetailPage = () => {
   const imageUrl = `https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com${memory.image_path}`;
 
   return (
-    <div className="min-h-screen bg-pink-50 p-6 flex flex-col items-center">
-      <div className="max-w-lg w-full bg-white p-6 rounded-2xl shadow-lg border border-pink-100">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 via-pink-100 to-pink-50 p-6 flex flex-col items-center">
+      <div className="max-w-lg w-full bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-pink-200">
         <img
           src={imageUrl}
           alt={memory.title}
-          className="w-full h-96 object-cover rounded-xl mb-4 cursor-pointer"
+          className="w-full h-96 object-cover rounded-xl mb-4 cursor-pointer transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl"
           onClick={() => setIsZoomed(true)}
         />
-        <h2 className="text-2xl font-bold text-pink-600 mb-2">{memory.title}</h2>
+        <h2 className="text-3xl font-extrabold text-pink-700 mb-2">{memory.title}</h2>
         <p className="text-gray-700 mb-4">{memory.description}</p>
+
         <div className="flex justify-between items-start mt-4">
           <div>
-            <p className="text-sm text-gray-500">📅 Date: {new Date(Number(memory.date)).toLocaleDateString('en-GB')}</p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-pink-600">📅 Date: {new Date(Number(memory.date)).toLocaleDateString('en-GB')}</p>
+            <p className="text-sm text-pink-500">
               ⏱ Uploaded: {new Date(Number(memory.uploaded_at)).toLocaleDateString('en-GB')}
             </p>
           </div>
           <button
             onClick={handleDeleteClick}
-            className={`hover:cursor-pointer px-4 py-2 ${confirmingDelete ? 'bg-red-600' : 'bg-red-400'} hover:bg-red-500 text-white rounded-lg shadow-md transition`}
+            className={`px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105 ${confirmingDelete
+                ? 'bg-gradient-to-r from-red-500 to-red-600'
+                : 'bg-gradient-to-r from-red-400 to-red-500'
+              } text-white`}
           >
-            {confirmingDelete ? 'Are you sure?' : 'Remove Memory'}
+            {confirmingDelete ? 'Are you sure? 💔' : 'Remove Memory 🗑'}
           </button>
         </div>
       </div>
 
       <Link
         to="/gallery"
-        className="m-4 px-4 py-2 bg-pink-400 hover:bg-pink-500 text-white rounded-lg shadow-md transition"
+        className="m-4 px-4 py-2 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-lg shadow-md transition-transform transform hover:scale-105"
       >
         Go Back 💖
       </Link>
@@ -109,17 +113,18 @@ const MemoryDetailPage = () => {
       {/* FULLSCREEN IMAGE OVERLAY */}
       {isZoomed && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
           onClick={() => setIsZoomed(false)}
         >
           <img
             src={imageUrl}
             alt={memory.title}
-            className="max-w-full max-h-full"
+            className="max-w-full max-h-full rounded-lg shadow-lg"
           />
         </div>
       )}
     </div>
+
   );
 };
 
