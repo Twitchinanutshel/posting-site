@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const heartPulse = {
+  animate: {
+    scale: [1, 1.15, 1],
+    transition: {
+      duration: 1.5,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
 
 const TimerPage = () => {
   const startDate = new Date("2023-08-11T00:00:00");
+  const targetDate = new Date("2025-10-22T00:00:00");
 
   const calculateTimeElapsed = () => {
     const now = new Date();
@@ -13,32 +26,23 @@ const TimerPage = () => {
     let minutes = now.getMinutes() - startDate.getMinutes();
     let seconds = now.getSeconds() - startDate.getSeconds();
 
-    // Handle negative seconds → minutes
     if (seconds < 0) {
       seconds += 60;
       minutes--;
     }
-
-    // Handle negative minutes → hours
     if (minutes < 0) {
       minutes += 60;
       hours--;
     }
-
-    // Handle negative hours → days
     if (hours < 0) {
       hours += 24;
       days--;
     }
-
-    // Handle negative days → months
     if (days < 0) {
       const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
       days += prevMonth.getDate();
       months--;
     }
-
-    // Handle negative months → years
     if (months < 0) {
       months += 12;
       years--;
@@ -47,27 +51,121 @@ const TimerPage = () => {
     return { years, months, days, hours, minutes, seconds };
   };
 
+  const calculateTimeRemaining = () => {
+    const now = new Date();
+    let diff = targetDate - now;
+
+    if (diff < 0) diff = 0;
+
+    let years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+    diff -= years * 1000 * 60 * 60 * 24 * 365;
+
+    let months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.4375));
+    diff -= months * 1000 * 60 * 60 * 24 * 30.4375;
+
+    let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * 1000 * 60 * 60 * 24;
+
+    let hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * 1000 * 60 * 60;
+
+    let minutes = Math.floor(diff / (1000 * 60));
+    diff -= minutes * 1000 * 60;
+
+    let seconds = Math.floor(diff / 1000);
+
+    return { years, months, days, hours, minutes, seconds };
+  };
+
   const [elapsed, setElapsed] = useState(calculateTimeElapsed());
+  const [remaining, setRemaining] = useState(calculateTimeRemaining());
 
   useEffect(() => {
     const interval = setInterval(() => {
       setElapsed(calculateTimeElapsed());
+      setRemaining(calculateTimeRemaining());
     }, 1000);
     return () => clearInterval(interval);
   }, []);
 
+  const renderTimeUnits = (timeObj) => {
+    return [
+      { label: "Years", value: timeObj.years },
+      { label: "Months", value: timeObj.months },
+      { label: "Days", value: timeObj.days },
+      { label: "Hours", value: timeObj.hours },
+      { label: "Minutes", value: timeObj.minutes },
+      { label: "Seconds", value: timeObj.seconds },
+    ];
+  };
+
   return (
-    <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center text-pink-600 text-2xl font-bold">
-      <h2 className="mb-6 text-3xl">💕 Time Since 11th August 2023 💕</h2>
-      <div className="flex flex-wrap gap-4 text-center">
-        <div>{elapsed.years} <span className="text-pink-400 text-lg">Years</span></div>
-        <div>{elapsed.months} <span className="text-pink-400 text-lg">Months</span></div>
-        <div>{elapsed.days} <span className="text-pink-400 text-lg">Days</span></div>
-        <div>{elapsed.hours} <span className="text-pink-400 text-lg">Hours</span></div>
-        <div>{elapsed.minutes} <span className="text-pink-400 text-lg">Minutes</span></div>
-        <div>{elapsed.seconds} <span className="text-pink-400 text-lg">Seconds</span></div>
+    <motion.div
+      className="min-h-screen bg-pink-50 flex flex-col items-center justify-center text-pink-600 font-bold px-4"
+      animate={{ scale: [1, 1.03, 1], transition: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
+    >
+      <h2 className="mb-6 text-3xl text-center flex items-center justify-center gap-2">
+        <motion.span
+          role="img"
+          aria-label="heart"
+          variants={heartPulse}
+          animate="animate"
+          className="text-4xl"
+        >
+          💕
+        </motion.span>
+        Time Since 11th August 2023
+      </h2>
+      <div className="flex flex-wrap gap-6 text-center mb-16 text-2xl">
+        {renderTimeUnits(elapsed).map((unit) => (
+          <div key={"elapsed-" + unit.label}>
+            <AnimatePresence mode="popLayout">
+              <motion.div
+                key={unit.value}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.3 }}
+              >
+                {unit.value}
+              </motion.div>
+            </AnimatePresence>
+            <span className="text-pink-400 text-lg">{unit.label}</span>
+          </div>
+        ))}
       </div>
-    </div>
+
+      <h2 className="mb-6 text-3xl text-center flex items-center justify-center gap-2">
+        <motion.span
+          role="img"
+          aria-label="heart"
+          variants={heartPulse}
+          animate="animate"
+          className="text-4xl"
+        >
+          💖
+        </motion.span>
+        Countdown to 22nd October 2025
+      </h2>
+      <div className="flex flex-wrap gap-6 text-center text-2xl">
+        {renderTimeUnits(remaining).map((unit) => (
+          <div key={"remaining-" + unit.label}>
+            <AnimatePresence mode="popLayout">
+              <motion.div
+                key={unit.value}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.3 }}
+              >
+                {unit.value}
+              </motion.div>
+            </AnimatePresence>
+            <span className="text-pink-400 text-lg">{unit.label}</span>
+          </div>
+        ))}
+      </div>
+    </motion.div>
   );
 };
 
