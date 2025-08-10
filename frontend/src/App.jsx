@@ -6,7 +6,6 @@ import GalleryPage from './pages/GalleryPage';
 import AddPage from './pages/AddPage';
 import MemoryDetailPage from './pages/MemoryDetailPage';
 import ProtectedRoute from './components/ProtectedRoute';
-import BackgroundParticles from './components/BackgroundParticles';
 
 import { gql, useQuery } from '@apollo/client';
 
@@ -30,7 +29,6 @@ function App() {
 
   return (
     <>
-      <BackgroundParticles />
       <Router>
         <Routes>
           <Route index path='/' element={<PasswordPage onLoginSuccess={refetch}/>} />
