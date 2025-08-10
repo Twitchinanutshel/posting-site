@@ -7,7 +7,7 @@ import AddPage from './pages/AddPage';
 import MemoryDetailPage from './pages/MemoryDetailPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import TimerPage from './pages/TimerPage'
-import Loader from '../components/Loader';
+import Loader from './components/Loader'
 
 import { gql, useQuery } from '@apollo/client';
 
