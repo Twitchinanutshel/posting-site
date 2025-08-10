@@ -19,6 +19,7 @@ const GET_MEMORIES = gql`
 
 const GalleryPage = () => {
   const { data, loading, error, refetch } = useQuery(GET_MEMORIES);
+  console.log('Image URL:', `https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com${memory.image_path}`);
 
   useEffect(() => {
     refetch();
