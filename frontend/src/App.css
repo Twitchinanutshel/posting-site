@@ -1,47 +1,22 @@
-.floating-shapes-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
+@import "tailwindcss";
+
+body {
   height: 100vh;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
+  margin: 0;
+  background: radial-gradient(circle at center, rgba(255, 137, 235, 0.8), rgb(255, 137, 235) 70%);
+  animation: moveGradient 10s ease-in-out infinite alternate;
 }
 
-.floating-shape {
-  position: absolute;
-  opacity: 0.7;
-  animation: floatUp 10s linear infinite;
-}
-
-@keyframes floatUp {
+@keyframes moveGradient {
   0% {
-    transform: translateY(100vh) rotate(0deg);
-    opacity: 0.7;
+    background-position: 50% 50%;
+  }
+
+  50% {
+    background-position: 40% 60%;
   }
 
   100% {
-    transform: translateY(-10vh) rotate(360deg);
-    opacity: 0;
+    background-position: 50% 50%;
   }
 }
-
-/* Add specific styles for hearts, stars, etc */
-.floating-shape.heart {
-  width: 20px;
-  height: 20px;
-  background: red;
-  clip-path: polygon(50% 15%, 61% 30%, 75% 30%, 85% 40%, 85% 60%, 75% 75%,
-      50% 95%, 25% 75%, 15% 60%, 15% 40%, 25% 30%, 39% 30%);
-}
-
-.floating-shape.star {
-  width: 15px;
-  height: 15px;
-  background: gold;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%,
-      21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-
-/* You can add more shapes with different clip-paths or SVGs */
