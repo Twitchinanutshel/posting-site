@@ -6,6 +6,7 @@ import GalleryPage from './pages/GalleryPage';
 import AddPage from './pages/AddPage';
 import MemoryDetailPage from './pages/MemoryDetailPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import FloatingRomanticShapes from './components/FloatingRomanticShapes';
 
 import { gql, useQuery } from '@apollo/client';
 
@@ -17,7 +18,7 @@ const IS_AUTHENTICATED = gql`
 
 function App() {
   const { data, loading, error, refetch } = useQuery(IS_AUTHENTICATED);
-  
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error checking auth status</p>;
@@ -28,10 +29,11 @@ function App() {
 
 
   return (
-    <>
+    <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
+      <FloatingRomanticShapes />
       <Router>
         <Routes>
-          <Route index path='/' element={<PasswordPage onLoginSuccess={refetch}/>} />
+          <Route index path='/' element={<PasswordPage onLoginSuccess={refetch} />} />
           <Route path='/gallery' element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <GalleryPage />
@@ -49,7 +51,8 @@ function App() {
           } />
         </Routes>
       </Router>
-    </>
+    </div>
+
   )
 }
 
