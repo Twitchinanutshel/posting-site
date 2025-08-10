@@ -1,10 +1,14 @@
 @import "tailwindcss";
 
-body {
-  height: 100vh;
+/* App.css */
+
+body,
+#root {
+  height: 100%;
   margin: 0;
-  background: radial-gradient(circle at center, rgba(255, 137, 235, 0.8), rgb(255, 137, 235) 70%);
-  animation: moveGradient 10s ease-in-out infinite alternate;
+  background: radial-gradient(circle 200px at 50% 50%, rgba(255, 137, 235, 0.8), rgb(255, 137, 235) 80%);
+  animation: moveGradient 12s ease-in-out infinite alternate;
+  overflow-x: hidden;
 }
 
 @keyframes moveGradient {
@@ -12,8 +16,16 @@ body {
     background-position: 50% 50%;
   }
 
+  25% {
+    background-position: 30% 40%;
+  }
+
   50% {
-    background-position: 40% 60%;
+    background-position: 70% 60%;
+  }
+
+  75% {
+    background-position: 40% 80%;
   }
 
   100% {
