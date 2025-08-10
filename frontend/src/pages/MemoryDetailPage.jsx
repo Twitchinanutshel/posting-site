@@ -78,7 +78,7 @@ const MemoryDetailPage = () => {
         <img
           src={imageUrl}
           alt={memory.title}
-          className="w-full h-full object-cover rounded-xl mb-4 cursor-pointer"
+          className="w-full h-96 object-cover rounded-xl mb-4 cursor-pointer"
           onClick={() => setIsZoomed(true)}
         />
         <h2 className="text-2xl font-bold text-pink-600 mb-2">{memory.title}</h2>
