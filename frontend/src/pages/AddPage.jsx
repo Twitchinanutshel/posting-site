@@ -100,7 +100,7 @@ const AddPage = () => {
             accept="image/*"
             onChange={handleFileChange}
             required
-            className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-full file:bg-gradient-to-r from-pink-300 to-pink-400 file:text-white hover:file:from-pink-400 hover:file:to-pink-500 cursor-pointer"
+            className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-full file:bg-gradient-to-r bg-pink-400 from-pink-300 to-pink-400 file:text-white hover:file:from-pink-400 hover:file:to-pink-500 cursor-pointer"
           />
 
           {previewUrl && (
