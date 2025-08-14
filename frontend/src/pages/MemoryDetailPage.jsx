@@ -72,7 +72,7 @@ const MemoryDetailPage = () => {
 
   const memory = data.getMemoryById;
 
-  const imageUrl = `https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com${memory.image_path}`;
+  const imageUrl = `https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com/uploads/${memory.image_path}`;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-pink-100 to-pink-50 p-6 flex flex-col items-center">
@@ -80,6 +80,7 @@ const MemoryDetailPage = () => {
         <img
           src={imageUrl}
           alt={memory.title}
+          crossOrigin="use-credentials"
           className="w-full h-96 object-cover rounded-xl mb-4 cursor-pointer transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl"
           onClick={() => setIsZoomed(true)}
         />

@@ -45,7 +45,7 @@ const memoryResolvers = {
 
         const [result] = await pool.query(
           'INSERT INTO memories (title, description, image_path, date) VALUES (?, ?, ?, ?)',
-          [title, description, `/uploads/${filename}`, date]
+          [title, description, filename, date]
         );
 
         return {

@@ -69,8 +69,9 @@ const GalleryPage = () => {
           <Link key={memory.id} to={`/memory/${memory.id}`}>
             <div className="bg-white/80 p-4 rounded-2xl shadow-lg hover:shadow-xl transition transform hover:scale-105 border border-pink-200 backdrop-blur-sm">
               <img
-                src={`https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com${memory.image_path}`}
+                src={`https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com/uploads/${memory.image_path}`}
                 alt={memory.title}
+                crossOrigin="use-credentials"
                 className="w-full h-48 object-cover rounded-xl mb-3 shadow-sm"
               />
               <h3 className="text-lg font-bold text-pink-700">{memory.title}</h3>
