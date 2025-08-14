@@ -8,6 +8,8 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import { typeDefs, resolvers } from './graphql/index.js';
 import { verifyToken } from './graphql/utils/auth.js';
 import fs from 'fs';
+import stream from 'stream';
+import { promisify } from 'util';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,18 +18,21 @@ const app = express();
 
 app.use(cookieParser())
 
-app.get('/uploads/:filename', (req, res) => {
+const pipeline = promisify(stream.pipeline);
+
+app.get('/uploads/:filename', async (req, res) => {
   try {
-    verifyToken(req); 
+    verifyToken(req);
 
     const filePath = path.join(process.cwd(), 'uploads', req.params.filename);
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).send('File not found');
-    }
+    if (!fs.existsSync(filePath)) return res.status(404).send('File not found');
 
-    res.sendFile(filePath);
+    const readStream = fs.createReadStream(filePath);
+    res.setHeader('Content-Type', 'image/jpeg'); // adjust dynamically if needed
+    await pipeline(readStream, res);
   } catch (err) {
-    return res.status(403).json({ error: 'Unauthorized' });
+    console.error(err);
+    res.status(403).json({ error: 'Unauthorized' });
   }
 });
 

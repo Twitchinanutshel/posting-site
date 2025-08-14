@@ -71,7 +71,6 @@ const GalleryPage = () => {
               <img
                 src={memory.image_path}
                 alt={memory.title}
-                crossOrigin="use-credentials"
                 className="w-full h-48 object-cover rounded-xl mb-3 shadow-sm"
               />
               <h3 className="text-lg font-bold text-pink-700">{memory.title}</h3>
