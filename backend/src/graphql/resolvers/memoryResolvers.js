@@ -1,58 +1,47 @@
 import pool from '../../db.js';
-import fs from 'fs';
-import path from 'path';
 import { GraphQLUpload } from 'graphql-upload';
 import { verifyToken } from '../utils/auth.js';
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+
+const s3 = new S3Client({
+  region: "auto",
+  endpoint: "https://6996b0642a70cac8cb2ecee886f523ac.r2.cloudflarestorage.com",
+  credentials: {
+    accessKeyId: process.env.R2_ACCESS_KEY,
+    secretAccessKey: process.env.R2_SECRET_KEY
+  }
+});
 
 const memoryResolvers = {
-  Query: {
-    getMemories: async (_, __, context) => {
-      verifyToken(context.req);
-
-      try {
-        const [rows] = await pool.query('SELECT * FROM memories');
-        return rows;
-      } catch (error) {
-        console.error('Error fetching memories:', error);
-        throw new Error('Failed to get memories');
-      }
-    },
-    getMemoryById: async (_, { id }, context) => {
-      verifyToken(context.req);
-      const [rows] = await pool.query('SELECT * FROM memories WHERE id = ?', [id]);
-      return rows[0];
-    }
-  },
   Mutation: {
     addMemory: async (_, { title, description, file, date }, context) => {
       verifyToken(context.req);
 
       try {
-        const { createReadStream, filename } = await file;
-        const uploadDir = path.join(process.cwd(), 'uploads');
+        const { createReadStream, filename, mimetype } = await file;
 
-        if (!fs.existsSync(uploadDir)) {
-          fs.mkdirSync(uploadDir);
-        }
+        // Upload directly to R2
+        await s3.send(new PutObjectCommand({
+          Bucket: "memories-images",
+          Key: filename,
+          Body: createReadStream(),
+          ContentType: mimetype
+        }));
 
-        const filePath = path.join(uploadDir, filename);
-        await new Promise((resolve, reject) => {
-          createReadStream()
-            .pipe(fs.createWriteStream(filePath))
-            .on('finish', resolve)
-            .on('error', reject);
-        });
+        // Construct public URL
+        const imageUrl = `https://6996b0642a70cac8cb2ecee886f523ac.r2.cloudflarestorage.com/memories-images/${filename}`;
 
+        // Store URL in MySQL
         const [result] = await pool.query(
           'INSERT INTO memories (title, description, image_path, date) VALUES (?, ?, ?, ?)',
-          [title, description, filename, date]
+          [title, description, imageUrl, date]
         );
 
         return {
           id: result.insertId,
           title,
           description,
-          image_path: `/uploads/${filename}`,
+          image_path: imageUrl,
           date,
           uploaded_at: new Date().toISOString()
         };
@@ -60,16 +49,18 @@ const memoryResolvers = {
         console.error('Error adding memory:', error);
         throw error;
       }
-    },
-    deleteMemory: async (_, { id }, context) => {
+    }
+  },
+  Query: {
+    getMemories: async (_, __, context) => {
       verifyToken(context.req);
-      try {
-        const [result] = await pool.query('DELETE FROM memories WHERE id = ?', [id]);
-        return result.affectedRows > 0;
-      } catch (error) {
-        console.error('Error deleting memory:', error);
-        throw new Error('Failed to delete memory');
-      }
+      const [rows] = await pool.query('SELECT * FROM memories');
+      return rows;
+    },
+    getMemoryById: async (_, { id }, context) => {
+      verifyToken(context.req);
+      const [rows] = await pool.query('SELECT * FROM memories WHERE id = ?', [id]);
+      return rows[0];
     }
   },
   Upload: GraphQLUpload,

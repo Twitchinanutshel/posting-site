@@ -72,7 +72,7 @@ const MemoryDetailPage = () => {
 
   const memory = data.getMemoryById;
 
-  const imageUrl = `https://posting-site-noahgauci-76f8b67cb3a2.herokuapp.com/uploads/${memory.image_path}`;
+  const imageUrl = memory.image_path
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-pink-100 to-pink-50 p-6 flex flex-col items-center">
